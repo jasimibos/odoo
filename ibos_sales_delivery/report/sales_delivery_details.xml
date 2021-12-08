@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_sales_delivery_details">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="text-center">
+                        <h2>Delivery Pending Products</h2>
+                    </div>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>From</th>
+                                <th>Order-No</th>
+                                <th>Order Date</th>
+                                <th>Delivery Date</th>
+                                <th>Status</th>
+                                <th>Reference</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <t t-foreach="sales" t-as="d">
+                                <tr>
+                                    <td>
+                                        <span t-esc="d['product_id']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="d['product_qty']"/>
+                                    </td>
+
+                                    <td>
+                                        <span t-esc="d['location_id']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="d['origin']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="d['scheduled_date']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="d['date_deadline']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="d['state']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="d['name']"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

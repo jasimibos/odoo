@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_inventory_type_details">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="text-center">
+                        <h2>Delivery Pending</h2>
+                    </div>
+                    <h3>Payments</h3>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Name:</th>
+                                <th>Partner Id:</th>
+                                <th>Start Date:</th>
+                                <th>End Date:</th>
+                                <th>Origin:</th>
+                                <th>Product Id:</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="delivery" t-as="d">
+                                <tr>
+
+                                    <td>
+                                        <span t-esc="d['name']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="d['partner_id']"/>
+                                    </td>
+
+                                    <td>
+                                        <span t-esc="d['scheduled_date']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="d['date_deadline']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="d['origin']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="d['product_id']"/>
+                                    </td>
+
+
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>
