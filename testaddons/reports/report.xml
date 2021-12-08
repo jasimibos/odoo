@@ -1,0 +1,21 @@
+<odoo>
+<!--    <report-->
+<!--    id="report_patient_car"-->
+<!--    string="Patient Card"-->
+<!--    model="sale.order"-->
+<!--    report_type="qweb-pdf"-->
+<!--    name="testaddons.report_patient"-->
+<!--    file="testaddons.report_patient"-->
+<!--    />-->
+
+    <record id="report_patient_car" model="ir.actions.report">
+            <field name="name">Patient Card</field>
+            <field name="model">hospital.patient</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">testaddons.report_patient</field>
+            <field name="report_file">testaddons.report_patient</field>
+            <field name="binding_model_id" ref="model_hospital_patient"/>
+            <field name="binding_type">report</field>
+        </record>
+
+</odoo>

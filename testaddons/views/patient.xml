@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--         DEFINE KANBAN VIEW -->
+    <record id="view_patient_kanban" model="ir.ui.view">
+        <field name="name">patient.info.kanban</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="patient_name"/>
+                <field name="gender"/>
+                <field name="patient_age"/>
+                <field name="note"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>
+                                        Name:
+                                        <field name="patient_name"/>
+                                    </li>
+                                    <li>
+                                        Age:
+                                        <field name="patient_age"/>
+                                    </li>
+                                    <li>
+                                        Gender:
+                                        <field name="gender"/>
+                                    </li>
+                                    <li>
+                                        State:
+                                        <field name="state"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <!--         TREE VIEW  -->
+    <record id="view_patient_tree" model="ir.ui.view">
+        <field name="name">patient.info.tree</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reference"/>
+                <field name="patient_name"/>
+                <field name="responsible_id"/>
+                <field name="gender"/>
+                <field name="patient_age"/>
+                <field name="note"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <!--                FROM VIEW-->
+    <record id="view_patient_form" model="ir.ui.view">
+        <field name="name">patient.info.form</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button id="action_confirm" name="action_confirm" string="Confirm" states="draft"
+                            class="btn-primary" confirm="Are you sure that you need to confirm ?" type="object"/>
+                    <button id="action_done" name="action_done" string="Done" states="confirm"
+                            class="btn-primary" type="object"/>
+                    <button id="action_draft" name="action_draft" string="Draft" states="cancel"
+                            class="btn-primary" type="object"/>
+                    <button id="action_cancel" name="action_cancel" string="Cancel" states="draft,done,confirm"
+                             confirm="Are you sure that you need to cancel ?" type="object"/>
+                     <button id="button_create_appointment" name="%(action_create_appointment)d" string="Create Appointment"
+                            class="btn-primary"  type="action"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done,confirm,"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_name"/>
+                            <field name="responsible_id"/>
+                            <field name="gender"/>
+                        </group>
+                        <group>
+                            <field name="patient_age"/>
+                            <field name="note"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!--         DEFINE THE SEARCH VIEW AND FILTER -->
+    <record id="view_patient_search" model="ir.ui.view">
+        <field name="name">Information.search</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <search string="user">
+                <field name="patient_name"/>
+                <field name="note"/>
+                <filter string="Male" name="male" domain="[('gender', '=','male')]"/>
+                <filter string="Female" name="female" domain="[('gender', '=','female')]"/>
+                <filter string="Other" name="other" domain="[('gender', '=','other')]"/>
+                <group expand="1" string="Group By">
+                    <filter string="patient_name" name="patient_name" context="{'group_by': 'patient_name'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">Patient Information</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p>create your first database!</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_hospital_root"
+              name="Hospital"
+              sequence="10"/>
+
+    <menuitem id="menu_patient_root"
+              name="Patients"
+              parent="menu_hospital_root"
+              sequence="10"/>
+
+    <menuitem id="menu_patient"
+              name="Patients"
+              parent="menu_patient_root"
+              action="action_hospital_patient"
+              sequence="10"/>
+
+
+</odoo>
+
+
